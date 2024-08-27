@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brewing</title>
+
+    <!-- Imports the CSS stylesheet -->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lets find the best Brewery for you</h1>
+
+        <!-- Form element to select from dropdown menu  -->
+        <form action="/" id="form" class="form" method="POST">
+          <select name="country" class="form-select" autocomplete="off">
+            <option value="" data-display="Select">Random country</option>
+            <option value="austria">Austria</option>
+            <option value="england">England</option>
+            <option value="france">France</option>
+            <option value="ireland">Ireland</option>
+            <option value="poland">Poland</option>
+            <option value="portugal">Portugal</option>
+            <option value="scotland">Scotland</option>
+            <option value="singapore">Singapore</option>
+          </select>
+          <select name="type" class="form-select">
+            <option value="">Random type</option>
+            <option value="micro">micro</option>
+            <option value="nano">nano</option>
+            <option value="regional">regional</option>
+            <option value="brewpub">brewpub</option>
+            <option value="large">large</option>
+          </select>
+          <button type="submit" class="form-submit">Lets Party</button>
+        </form>
+        
+        <!-- To display the result gets the value from the API -->
+        <section id="cards" class="cards">
+            <%if (locals.content) {%>
+            <article class="card-item">
+              <h2 class="card-activity">
+                <a href="<%= content.website_url %>"><%= content.name %></a>
+              </h2>
+              <div class="card-info">
+                <span class="card-type">
+                  <a href="https://www.google.com/maps/@<%=content.longitude%>,<%=content.latitude%>"><%= content.country %></a>
+                </span>
+                <span class="card-participants">
+                  <%= content.brewery_type %>
+                    <span class="card-number"></span>
+                </span>
+              </div>
+            </article>
+            <%}%>
+    
+          <%if(locals.error){%>
+          <div id="tag-error" class="tag-error">
+             <%=error%>
+          </div>
+          <%}%>
+        </section>
+      </div>
+</body>
+</html>
